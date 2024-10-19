@@ -14,7 +14,7 @@ import {
 } from "react-native"
 import { $styles } from "../theme"
 import { ExtendedEdge, useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
-import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
+// import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { useAppTheme } from "@/utils/useAppTheme"
 
 export const DEFAULT_BOTTOM_OFFSET = 50
@@ -205,27 +205,26 @@ function ScreenWithScrolling(props: ScreenProps) {
   useScrollToTop(ref)
 
   return (
-    <KeyboardAwareScrollView
-      bottomOffset={keyboardBottomOffset}
-      {...{ keyboardShouldPersistTaps, scrollEnabled, ref }}
-      {...ScrollViewProps}
-      onLayout={(e) => {
-        onLayout(e)
-        ScrollViewProps?.onLayout?.(e)
-      }}
-      onContentSizeChange={(w: number, h: number) => {
-        onContentSizeChange(w, h)
-        ScrollViewProps?.onContentSizeChange?.(w, h)
-      }}
-      style={[$outerStyle, ScrollViewProps?.style, style]}
-      contentContainerStyle={[
-        $innerStyle,
-        ScrollViewProps?.contentContainerStyle,
-        contentContainerStyle,
-      ]}
-    >
-      {children}
-    </KeyboardAwareScrollView>
+    // <KeyboardAwareScrollView
+    //   bottomOffset={keyboardBottomOffset}
+    //   {...{ keyboardShouldPersistTaps, scrollEnabled, ref }}
+    //   {...ScrollViewProps}
+    //   onLayout={(e) => {
+    //     onLayout(e)
+    //     ScrollViewProps?.onLayout?.(e)
+    //   }}
+    //   onContentSizeChange={(w: number, h: number) => {
+    //     onContentSizeChange(w, h)
+    //     ScrollViewProps?.onContentSizeChange?.(w, h)
+    //   }}
+    //   style={[$outerStyle, ScrollViewProps?.style, style]}
+    //   contentContainerStyle={[
+    //     $innerStyle,
+    //     ScrollViewProps?.contentContainerStyle,
+    //     contentContainerStyle,
+    //   ]}
+    // >
+    <>{children}</>
   )
 }
 

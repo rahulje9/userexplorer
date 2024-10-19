@@ -1,5 +1,7 @@
 import { MMKV } from "react-native-mmkv"
-export const storage = new MMKV()
+import { MMKVFaker } from "./mmkvFaker"
+
+export const storage = __DEV__ ? new MMKVFaker() : new MMKV()
 
 /**
  * Loads a string from storage.
