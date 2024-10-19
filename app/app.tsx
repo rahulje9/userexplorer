@@ -23,15 +23,13 @@ import { useFonts } from "expo-font"
 import { useEffect, useState } from "react"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 import * as Linking from "expo-linking"
-import { useInitialRootStore } from "./models"
 import { AppNavigator, useNavigationPersistence } from "./navigators"
 import { ErrorBoundary } from "./screens/ErrorScreen/ErrorBoundary"
 import * as storage from "./utils/storage"
 import { customFontsToLoad } from "./theme"
 import Config from "./config"
-// import { KeyboardProvider } from "react-native-keyboard-controller"
 import { loadDateFnsLocale } from "./utils/formatDate"
-
+import { useInitialRootStore } from "./models/helpers/useStores"
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
 // Web linking configuration
@@ -80,6 +78,10 @@ function App(props: AppProps) {
       .then(() => setIsI18nInitialized(true))
       .then(() => loadDateFnsLocale())
   }, [])
+
+  // useEffect(() => {
+  //   setTimeout(hideSplashScreen, 500)
+  // }, [])
 
   const { rehydrated } = useInitialRootStore(() => {
     // This runs after the root store has been initialized and rehydrated.

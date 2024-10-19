@@ -4128,7 +4128,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.4.0":
+"axios@npm:^1.4.0, axios@npm:^1.7.7":
   version: 1.7.7
   resolution: "axios@npm:1.7.7"
   dependencies:
@@ -13220,6 +13220,7 @@ __metadata:
     "@types/jest": ^29.2.1
     "@types/react": ~18.2.14
     apisauce: 3.0.1
+    axios: ^1.7.7
     babel-jest: ^29.2.1
     date-fns: ^4.1.0
     eslint: ^8.57.0
