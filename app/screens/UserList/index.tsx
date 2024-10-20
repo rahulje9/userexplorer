@@ -2,9 +2,11 @@
 /* eslint-disable react-native/no-color-literals */
 import { Card } from "@/components"
 import { useStores } from "@/models/helpers/useStores"
+import { navigationRef } from "@/navigators"
 import { UserInterface } from "@/types/User"
+import { useAppTheme } from "@/utils/useAppTheme"
 import { StatusBar } from "expo-status-bar"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import {
   ActivityIndicator,
   FlatList,
@@ -13,6 +15,7 @@ import {
   RefreshControl,
   SafeAreaView,
   StyleSheet,
+  Text,
   View,
 } from "react-native"
 
@@ -20,9 +23,9 @@ const UserList = () => {
   const { UserStore } = useStores()
   const [pageNo, setPageNo] = useState<number>(0)
 
-  const totalPages = UserStore.totalPages
-  const totalPagesRef = useRef<number>(totalPages)
-  totalPagesRef.current = totalPages
+  const {
+    theme: { colors, isDark },
+  } = useAppTheme()
 
   useEffect(() => {
     onMount()
@@ -33,19 +36,27 @@ const UserList = () => {
     await UserStore.fetchUserList(pageNo)
   }
 
-  const onCardPress = (item: UserInterface) => {}
+  const onCardPress = (id: number) => {
+    if (id) {
+      navigationRef.navigate("UserDetails", {
+        userID: id,
+      })
+    }
+  }
 
   const _renderItem: ListRenderItem<UserInterface> = ({ item }) => {
     return (
       <Card
         onPress={() => {
-          onCardPress(item)
+          onCardPress(item?.id)
         }}
         preset="reversed"
         verticalAlignment="space-between"
         LeftComponent={<Image style={styles.img} source={{ uri: item?.image }} />}
         heading={`${item?.firstName} ${item?.lastName}`}
-        headingStyle={styles.headingStyle}
+        headingStyle={{
+          color: !isDark ? colors.palette.neutral100 : colors.palette.neutral900,
+        }}
         HeadingTextProps={{ weight: "bold", size: "xl" }}
         content={`${item?.company?.name}`}
         contentStyle={styles.contentStyle}
@@ -76,7 +87,6 @@ const UserList = () => {
     UserStore.fetchUserList(1)
     setPageNo(1)
   }
-
   return (
     <SafeAreaView style={styles.flex1}>
       <StatusBar />
@@ -92,6 +102,7 @@ const UserList = () => {
           renderFooter={renderFooter}
           onEndReached={loadMore}
           onEndReachedThreshold={0.5}
+          ListEmptyComponent={<Text>No Users found</Text>}
         />
       </View>
     </SafeAreaView>
@@ -112,7 +123,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: "hidden",
   },
-  headingStyle: { color: "#000" },
   contentStyle: { color: "gray" },
   footerStyle: { color: "gray" },
   flatListCCS: {

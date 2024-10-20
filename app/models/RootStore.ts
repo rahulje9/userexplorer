@@ -1,13 +1,10 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
-// import { AuthenticationStoreModel } from "./AuthenticationStore"
-// import { EpisodeStoreModel } from "./EpisodeStore"
-import { defaultUsersData, UsersModel } from "./Users"
-
+import { UsersModel } from "./UsersListModel"
+import { defaultUserPostData, defaultUsersData } from "./defaultData"
 /**
  * A RootStore model.
  */
 
-const _defaultUsersData = { user: defaultUsersData }
 export const RootStoreModel = types.model("RootStore").props({
   UserStore: types.optional(UsersModel, {
     ...defaultUsersData,
@@ -15,6 +12,12 @@ export const RootStoreModel = types.model("RootStore").props({
     totalPages: 0,
     totalUsers: 0,
     isLoadingMore: false,
+
+    ...defaultUserPostData,
+    isPostLoading: false,
+    totalPost: 0,
+    totalPostPages: 0,
+    isPostLoadingMore: false,
   }),
 })
 

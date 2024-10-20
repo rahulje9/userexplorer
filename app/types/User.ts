@@ -69,3 +69,18 @@ export type UserInterface = {
   crypto: Crypto
   role: string
 }
+
+interface Reactions {
+  likes: number
+  dislikes: number
+}
+
+export type UserPostInterface = {
+  id: number
+  title: string
+  body: string
+  tags: string[]
+  reactions: Reactions
+  views: number
+  userId: number
+}
