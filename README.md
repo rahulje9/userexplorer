@@ -8,4 +8,4 @@ NB: While I've implemented all the necessary features, I encountered a couple of
 1. There is no loader displayed during API calls or related actions.
 2. The data only loads if the API is terminated and restarted on the first run.
 
-Prod build is available in github build folder
+Prod build is available in androidapk folder
