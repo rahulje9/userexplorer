@@ -43,7 +43,6 @@ const UserList = () => {
       })
     }
   }
-
   const _renderItem: ListRenderItem<UserInterface> = ({ item }) => {
     return (
       <Card
@@ -55,7 +54,7 @@ const UserList = () => {
         LeftComponent={<Image style={styles.img} source={{ uri: item?.image }} />}
         heading={`${item?.firstName} ${item?.lastName}`}
         headingStyle={{
-          color: !isDark ? colors.palette.neutral100 : colors.palette.neutral900,
+          color: isDark ? colors.palette.neutral100 : colors.palette.neutral900,
         }}
         HeadingTextProps={{ weight: "bold", size: "xl" }}
         content={`${item?.company?.name}`}
@@ -91,6 +90,7 @@ const UserList = () => {
     <SafeAreaView style={styles.flex1}>
       <StatusBar />
       <View style={styles.flex1}>
+        <View style={styles.notchFixer} />
         <FlatList
           contentContainerStyle={styles.flatListCCS}
           keyExtractor={(_, i) => i?.toString()}
@@ -102,7 +102,15 @@ const UserList = () => {
           renderFooter={renderFooter}
           onEndReached={loadMore}
           onEndReachedThreshold={0.5}
-          ListEmptyComponent={<Text>No Users found</Text>}
+          ListEmptyComponent={
+            <Text
+              style={{
+                color: colors.text,
+              }}
+            >
+              No Users found
+            </Text>
+          }
         />
       </View>
     </SafeAreaView>
@@ -128,5 +136,8 @@ const styles = StyleSheet.create({
   flatListCCS: {
     gap: 20,
     padding: 20,
+  },
+  notchFixer: {
+    height: 60,
   },
 })

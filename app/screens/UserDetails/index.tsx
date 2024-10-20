@@ -66,10 +66,9 @@ const UserDetailsScreen = ({ route }) => {
         <Card
           preset="reversed"
           verticalAlignment="space-between"
-          // LeftComponent={<Image style={styles.img} source={{ uri: item?.image }} />}
           heading={`${item?.title ?? ""}`}
           headingStyle={{
-            color: !isDark ? colors.palette.neutral100 : colors.palette.neutral900,
+            color: isDark ? colors.palette.neutral100 : colors.palette.neutral900,
           }}
           HeadingTextProps={{ weight: "bold", size: "xl" }}
           content={`${item?.body}`}
@@ -113,6 +112,8 @@ const UserDetailsScreen = ({ route }) => {
     <SafeAreaView style={styles.flex1}>
       <StatusBar />
       <View style={styles.flex1}>
+        <View style={styles.notchFixer} />
+
         <View style={styles.backBtnView}>
           <TouchableOpacity onPress={_onBack} style={styles.backBtn}>
             <Entypo name="chevron-left" size={24} color="blue" />
@@ -137,7 +138,15 @@ const UserDetailsScreen = ({ route }) => {
           renderFooter={renderFooter}
           onEndReached={loadMore}
           onEndReachedThreshold={0.5}
-          ListEmptyComponent={<Text>No Posts found</Text>}
+          ListEmptyComponent={
+            <Text
+              style={{
+                color: colors.text,
+              }}
+            >
+              No Posts found
+            </Text>
+          }
         />
       </View>
     </SafeAreaView>
@@ -182,5 +191,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  notchFixer: {
+    height: 60,
   },
 })
