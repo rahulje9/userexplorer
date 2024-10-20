@@ -3,6 +3,7 @@
   "displayName": "userexplorer",
   "expo": {
     "name": "userexplorer",
+    "owner": "rahulje9",
     "slug": "userexplorer",
     "scheme": "userexplorer",
     "version": "1.0.0",
@@ -18,9 +19,7 @@
       "fallbackToCacheTimeout": 0
     },
     "jsEngine": "hermes",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "android": {
       "icon": "./assets/images/app-icon-android-legacy.png",
       "package": "com.userexplorer",
@@ -71,6 +70,11 @@
     ],
     "experiments": {
       "tsconfigPaths": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "73259c83-a396-4a1a-ace0-5aafff40adf2"
+      }
     }
   },
   "ignite": {
